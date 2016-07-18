@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnLongClickListener{//nhan lau moi lam
 
     EditText txtA,txtB;
     //Anomous
@@ -17,7 +17,15 @@ public class MainActivity extends AppCompatActivity {
     Button btnNhan;
     Button btnChia;
 
+    View.OnClickListener suKienChiaSe = null;
 
+    //activity as listen: lớp có thể biến thành một activity co khả năng sinh sự kiện
+    Button btnAn;
+
+    //Explicit class Listen ner: dự án phình lớn=> Lớp tường minh, tự xây dựng sinh và chia sẻ sự kiện
+    Button btnThoat;
+
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +42,39 @@ public class MainActivity extends AppCompatActivity {
                 xuLyPhepTru();
             }
         });
+
+        suKienChiaSe = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {//tu dong hung control dang xu ly
+                if (v.getId() == R.id.btnNhan){
+                    xuLyPhepNhan();
+                }
+                else if (v.getId()==R.id.btnChia)
+                {
+                    xuLyPhepChia();
+                }
+            }
+        };
+        btnNhan.setOnClickListener(suKienChiaSe);
+        btnChia.setOnClickListener(suKienChiaSe);
+
+        btnAn.setOnLongClickListener(this);
+
+        btnThoat.setOnClickListener(new MyEvent());
+    }
+
+    private void xuLyPhepNhan() {
+        int a = Integer.parseInt(txtA.getText().toString());
+        int b = Integer.parseInt(txtB.getText().toString());
+        int c = a * b;
+        Toast.makeText(MainActivity.this,"Tích = " + c,Toast.LENGTH_SHORT).show();
+    }
+
+    private void xuLyPhepChia() {
+        int a = Integer.parseInt(txtA.getText().toString());
+        int b = Integer.parseInt(txtB.getText().toString());
+        int c = a / b;
+        Toast.makeText(MainActivity.this,"Thương = " + c,Toast.LENGTH_SHORT).show();
     }
 
     //anomous
@@ -41,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         int a = Integer.parseInt(txtA.getText().toString());
         int b = Integer.parseInt(txtB.getText().toString());
         int c = a - b;
-        Toast.makeText(MainActivity.this,"Hiệu = " + c,Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this,"Hiệu = " + c,Toast.LENGTH_SHORT).show();
     }
 
     private void addControls() {
@@ -50,14 +91,42 @@ public class MainActivity extends AppCompatActivity {
 
         //
         btnTru = (Button) findViewById(R.id.btnTru);
+        //khoi tao dia chi tham chieu
+        btnNhan = (Button) findViewById(R.id.btnNhan);
+        btnChia = (Button) findViewById(R.id.btnChia);
 
-
+        btnAn = (Button) findViewById(R.id.btnAn);
+        btnThoat = (Button) findViewById(R.id.btnThoat);
     }
 
     public void xuLyPhepCong(View v) {
         int a = Integer.parseInt(txtA.getText().toString());
         int b = Integer.parseInt(txtB.getText().toString());
         int c = a + b;
-        Toast.makeText(MainActivity.this,"Tổng = " + c,Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this,"Tổng = " + c,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        //mot man hinh co kha nang sinh su kien thi tat ca cac control trong do co the ke thua
+        if(v.getId() == R.id.btnAn){
+            btnAn.setVisibility(v.INVISIBLE);
+        }
+        return false;
+    }
+
+    //ex
+    public class MyEvent implements View.OnClickListener,View.OnLongClickListener{//lop tuong minh va cu the
+
+        @Override
+        public void onClick(View v) {
+            if(v.getId() == R.id.btnThoat)
+                finish();
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
     }
 }

@@ -74,4 +74,26 @@
             android:text="(/)Variable listener"
             android:id="@+id/btnChia" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activity As Listener"
+        android:id="@+id/btnAn"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ExplicitListener"
+        android:id="@+id/btnThoat"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Doi Man Hinh"
+        android:id="@+id/btnDoiManHinh"
+        android:onClick="xuLyDoiManHinh"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
