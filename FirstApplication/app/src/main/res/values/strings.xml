@@ -1,9 +1,0 @@
-<resources>
-    <!--Dinh nghia noi dung hien thi len giao dien va cac tap dinh nghia san-->
-    <string name="app_name">FirstApplication</string>
-    <!--Dinh nghia mang-->
-    <string-array name="arrThu">
-        <item>Thu 2</item>
-        <item>Thu 3</item>
-    </string-array>
-</resources>
