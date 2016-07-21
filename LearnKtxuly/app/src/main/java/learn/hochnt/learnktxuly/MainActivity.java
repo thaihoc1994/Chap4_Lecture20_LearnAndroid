@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
     //Explicit class Listen ner: dự án phình lớn=> Lớp tường minh, tự xây dựng sinh và chia sẻ sự kiện
     Button btnThoat;
 
-    //Classing
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);//truyen id hay control
+        setContentView(R.layout.activity_main);
         addControls();
         addEvents();
     }
@@ -63,6 +63,28 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         btnThoat.setOnClickListener(new MyEvent());
     }
 
+    private void xuLyPhepNhan() {
+        int a = Integer.parseInt(txtA.getText().toString());
+        int b = Integer.parseInt(txtB.getText().toString());
+        int c = a * b;
+        Toast.makeText(MainActivity.this,"Tích = " + c,Toast.LENGTH_SHORT).show();
+    }
+
+    private void xuLyPhepChia() {
+        int a = Integer.parseInt(txtA.getText().toString());
+        int b = Integer.parseInt(txtB.getText().toString());
+        int c = a / b;
+        Toast.makeText(MainActivity.this,"Thương = " + c,Toast.LENGTH_SHORT).show();
+    }
+
+    //anomous
+    private void xuLyPhepTru() {
+        int a = Integer.parseInt(txtA.getText().toString());
+        int b = Integer.parseInt(txtB.getText().toString());
+        int c = a - b;
+        Toast.makeText(MainActivity.this,"Hiệu = " + c,Toast.LENGTH_SHORT).show();
+    }
+
     private void addControls() {
         txtA = (EditText) findViewById(R.id.txtA);
         txtB = (EditText) findViewById(R.id.txtB);
@@ -77,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         btnThoat = (Button) findViewById(R.id.btnThoat);
     }
 
-    //khong can ađ vao event hay control, da khaibao ơ xml
     public void xuLyPhepCong(View v) {
         int a = Integer.parseInt(txtA.getText().toString());
         int b = Integer.parseInt(txtB.getText().toString());
@@ -85,27 +106,6 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         Toast.makeText(MainActivity.this,"Tổng = " + c,Toast.LENGTH_SHORT).show();
     }
 
-    //anomous
-    private void xuLyPhepTru() {
-        int a = Integer.parseInt(txtA.getText().toString());
-        int b = Integer.parseInt(txtB.getText().toString());
-        int c = a - b;
-        Toast.makeText(MainActivity.this,"Hiệu = " + c,Toast.LENGTH_SHORT).show();
-    }
-
-    private void xuLyPhepNhan() {
-        int a = Integer.parseInt(txtA.getText().toString());
-        int b = Integer.parseInt(txtB.getText().toString());
-        int c = a * b;
-        Toast.makeText(MainActivity.this,"Tích = " + c,Toast.LENGTH_SHORT).show();
-    }
-
-    private void xuLyPhepChia() {
-        int a = Integer.parseInt(txtA.getText().toString());
-        int b = Integer.parseInt(txtB.getText().toString());
-        int c = a / b;
-        Toast.makeText(MainActivity.this,"Thương = " + c,Toast.LENGTH_SHORT).show();
-    }
     @Override
     public boolean onLongClick(View v) {
         //mot man hinh co kha nang sinh su kien thi tat ca cac control trong do co the ke thua
@@ -128,23 +128,5 @@ public class MainActivity extends AppCompatActivity implements View.OnLongClickL
         public boolean onLongClick(View v) {
             return false;
         }
-    }
-
-    //view subclassing
-    public void xuLyDoiManHinh(View v){
-        Button btnMoi = new Button(MainActivity.this){//button tu tao => quay ve lai man hinh cu gom cac thuoc tinh da setting
-            @Override
-            public boolean performClick() {
-                setContentView(R.layout.activity_main);//truyen id hay control=>thay doi lay out
-                addControls();
-                addEvents();
-                return super.performClick();
-            }
-        };
-        btnMoi.setText("Quay về");//mot nut tran man hinh=>perform click
-        btnMoi.setWidth(100);
-        btnMoi.setHeight(100);
-
-        setContentView(btnMoi);//set view khi bam vao nut doi man hinh
     }
 }
